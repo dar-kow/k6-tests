@@ -1,0 +1,5 @@
+quiet: false         # Set to true for even less output
+console-output: none # Options: stdout, stderr, none, file
+no-color: false      # Set to true to disable colored output
+summary-trend-stats: avg,min,med,max,p(90),p(95) # Stats to show in summary
+summary-time-unit: ms # Time unit in summary (ms, s, etc.)
