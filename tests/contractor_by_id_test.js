@@ -6,14 +6,13 @@ import { DEFAULT_PROFILE, LOAD_PROFILES } from '../config/env.js';
 export function getOptions() {
   let profileName = __ENV.PROFILE || 'LIGHT';
   let profile = LOAD_PROFILES[profileName] || DEFAULT_PROFILE;
-  
-  return {
-    ...profile,
+  var options = Object.assign({}, profile, {
     thresholds: {
       'http_req_duration': ['p(95)<5000'],
       'http_req_failed': ['rate<0.1'],
     }
-  };
+  });
+  return options;
 }
 
 export let options = getOptions();
