@@ -14,17 +14,17 @@ RESULT_FILE="results/$(date +%Y%m%d_%H%M%S)_${1}.json"
 if [ "$1" == "all" ]; then
   TEST_FILE="run-all.js"
 elif [ "$1" == "contractors" ]; then
-  TEST_FILE="tests/contractors.js"
+  TEST_FILE="tests/contractors_test.js"
 elif [ "$1" == "invoices" ]; then
-  TEST_FILE="tests/invoices.js"
+  TEST_FILE="tests/invoices_test.js"
 elif [ "$1" == "invoice-items" ]; then
-  TEST_FILE="tests/invoice-items.js"
+  TEST_FILE="tests/invoice-items_test.js"
 elif [ "$1" == "contractor-by-id" ]; then
-  TEST_FILE="tests/contractor-by-id.js"
+  TEST_FILE="tests/contractor-by-id_test.js"
 elif [ "$1" == "invoice-by-id" ]; then
-  TEST_FILE="tests/invoice-by-id.js"
+  TEST_FILE="tests/invoice-by-id_test.js"
 elif [ "$1" == "last-invoice-number" ]; then
-  TEST_FILE="tests/last-invoice-number.js"
+  TEST_FILE="tests/last-invoice-number_test.js"
 else
   echo "Invalid test name: $1"
   echo "Available tests: all, contractors, invoices, invoice-items, contractor-by-id, invoice-by-id, last-invoice-number"
