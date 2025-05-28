@@ -1,14 +1,22 @@
-import { CURRENT_HOST, TOKENS } from '../config/env.js';
+import { HOSTS, TOKENS } from '../config/env.js';
+
+const CURRENT_HOST = __ENV.CURRENT_HOST || (__ENV.ENVIRONMENT === 'DEV' ? HOSTS.DEV : HOSTS.PROD);
+const CURRENT_TOKEN = __ENV.CURRENT_TOKEN || (__ENV.ENVIRONMENT === 'DEV' ? TOKENS.DEV.USER : TOKENS.PROD.USER);
 
 export function getUrl(path) {
   return `${CURRENT_HOST}${path}`;
 }
 
 export function getHeaders(role = 'USER') {
+  const token = __ENV.CURRENT_TOKEN || 
+                (__ENV.ENVIRONMENT === 'DEV' ? 
+                  (role === 'ADMIN' ? TOKENS.DEV.ADMIN : TOKENS.DEV.USER) : 
+                  (role === 'ADMIN' ? TOKENS.PROD.ADMIN : TOKENS.PROD.USER));
+
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: `Bearer ${TOKENS[role]}`
+    Authorization: `Bearer ${token}`
   };
 }
 
