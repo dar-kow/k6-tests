@@ -1,7 +1,7 @@
 import { HOSTS, TOKENS } from '../config/env.js';
 
 const CURRENT_HOST = __ENV.CURRENT_HOST || (__ENV.ENVIRONMENT === 'DEV' ? HOSTS.DEV : HOSTS.PROD);
-const CURRENT_TOKEN = __ENV.CURRENT_TOKEN || (__ENV.ENVIRONMENT === 'DEV' ? TOKENS.DEV.USER : TOKENS.PROD.USER);
+const TOKENS_FOR_ENV = __ENV.ENVIRONMENT === 'DEV' ? TOKENS.DEV : TOKENS.PROD;
 
 export function getUrl(path) {
   return `${CURRENT_HOST}${path}`;
@@ -9,9 +9,8 @@ export function getUrl(path) {
 
 export function getHeaders(role = 'USER') {
   const token = __ENV.CURRENT_TOKEN || 
-                (__ENV.ENVIRONMENT === 'DEV' ? 
-                  (role === 'ADMIN' ? TOKENS.DEV.ADMIN : TOKENS.DEV.USER) : 
-                  (role === 'ADMIN' ? TOKENS.PROD.ADMIN : TOKENS.PROD.USER));
+                __ENV.CUSTOM_TOKEN || 
+                (role === 'ADMIN' ? TOKENS_FOR_ENV.ADMIN : TOKENS_FOR_ENV.USER);
 
   return {
     Accept: "application/json",
