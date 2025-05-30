@@ -25,7 +25,6 @@ export default function() {
   
   const res = http.get(url, { headers });
   
-  // Log errors for non-200 responses
   if (res.status !== 200) {
     logError(`Contractor by ID GET request failed with status: ${res.status}`);
     if (res.body) {
